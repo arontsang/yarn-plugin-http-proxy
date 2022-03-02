@@ -1,0 +1,10 @@
+
+
+dist
+.yarn
+!.yarn/releases
+
+node_modules
+
+.idea/
+.vscode/
