@@ -1,7 +1,7 @@
+
 import {Plugin} from '@yarnpkg/core';
 import {Hooks} from "@yarnpkg/core/lib/Plugin";
 import Require = NodeJS.Require;
-import {bootstrap} from 'global-agent';
 
 const EnableGlobalProxyEnvironmentVariable: string = "EnableGlobalProxyEnvironmentVariable"
 
@@ -13,7 +13,8 @@ interface PluginFactory {
   factory: (require: Require) => Plugin<Hooks>
 }
 
-if(process.env[EnableGlobalProxyEnvironmentVariable]){
+if(globalThis.process != undefined && globalThis.process.env[EnableGlobalProxyEnvironmentVariable]){
+  const {bootstrap} = require('global-agent');
   bootstrap();
 }
 

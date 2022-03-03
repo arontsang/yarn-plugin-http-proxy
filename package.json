@@ -10,7 +10,8 @@
     "typescript": "4.6.2"
   },
   "scripts": {
-    "build": "esbuild --bundle src/index.ts --platform=node --outfile=./dist/index.cjs --format=cjs"
+    "build": "esbuild --bundle src/index.ts --platform=node --outfile=./dist/index.cjs --format=cjs --target=node10 --tree-shaking=true --minify --sourcemap",
+    "test:load": "yarn build && node ./src/test-load.js"
   },
   "devDependencies": {
     "esbuild": "^0.14.23"
