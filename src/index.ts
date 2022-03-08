@@ -23,8 +23,7 @@ const pluginFactory: PluginFactory = {
   factory: function (){
     return {
       hooks: {
-          wrapScriptExecution: async function(executor, project, locator, scriptName, {env}) {
-          return async () => {
+          setupScriptEnvironment : function(project, env): Promise<void> {
               let nodeOptions = env.NODE_OPTIONS || ``;
               let pnpRequire = `--require ${quotePathIfNeeded(__filename)}`;
               nodeOptions = nodeOptions ? `${pnpRequire} ${nodeOptions}` : pnpRequire;
@@ -33,8 +32,7 @@ const pluginFactory: PluginFactory = {
               env[EnableGlobalProxyEnvironmentVariable] = "true";
               env.GLOBAL_AGENT_ENVIRONMENT_VARIABLE_NAMESPACE = "";
 
-              return await executor();
-          };
+              return Promise.resolve();
         }
       }
     }
